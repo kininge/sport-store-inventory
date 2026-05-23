@@ -223,6 +223,18 @@ Inventory Service
 
 ---
 
+## 📜 License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+---
+
+## 👨‍💻 Author & Maintainer
+
+**Pritam Kininge** — Problem Solver 
+🗓️ Submitted: May 23, 2026  
+[LinkedIn](https://linkedin.com/in/pritam-kininge)  |  [GitHub](https://github.com/kininge)  |  [Leetcode](https://leetcode.com/u/kininge007/)
+
 
 
 
