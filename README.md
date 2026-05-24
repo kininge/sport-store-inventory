@@ -110,23 +110,23 @@ Inventory Service
   - create working backend
 
 #### Go concepts to lean:
-  - [] structs
-  - [] methods
+  - [x] structs
+  - [x] methods
   - [] interfaces (basic)
   - [] goroutines
   - [] channels (basic only)
-  - [] Gin framework
-  - [] database/sql OR GORM
+  - [x] Gin framework
+  - [x] database/sql OR GORM
   - [] context.Context
-  - [] error handling
+  - [x] error handling
 
 #### Deliverables
   - [x] Plan the project (22 May 10:00 PM)
   - [x] create repo (23 May - 7:00 AM)
-  - [] install Go
-  - [] setup PostgreSQL
-  - [] schema design
-  - [] learn and setup backend
+  - [x] install Go (23 May - 8:00 PM)
+  - [x] setup PostgreSQL (24 May - 12:12 PM)
+  - [x] schema design
+  - [x] learn and setup backend
 
 #### Note 
 
