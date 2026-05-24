@@ -125,8 +125,8 @@ Inventory Service
   - [x] create repo (23 May - 7:00 AM)
   - [x] install Go (23 May - 8:00 PM)
   - [x] setup PostgreSQL (24 May - 12:12 PM)
-  - [x] schema design
-  - [x] learn and setup backend
+  - [x] schema design (24 May - 3:00 PM)
+  - [x] learn and setup backend (24 May - 4:00 PM)
 
 #### Note 
 
