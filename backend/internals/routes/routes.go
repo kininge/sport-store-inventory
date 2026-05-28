@@ -22,11 +22,16 @@ func RegisterRoutes(router *gin.Engine) {
 		categories.PUT("/:id", handlers.UpdateCategory)
 		categories.DELETE("/:id", handlers.DeleteCategory)
 
+		// define routes for inventories export
+		inventories.GET("/export/:id", handlers.GetExportJobStatus)
+		inventories.GET("/export/:id/download", handlers.GetExportedFile)
+		inventories.POST("/export", handlers.GenerateExportJob)
 		// define routes for inventories
 		inventories.GET("", handlers.GetInventories)
 		inventories.GET("/:id", handlers.GetInventoryByID)
 		inventories.POST("", handlers.CreateInventory)
 		inventories.PUT("/:id", handlers.UpdateInventory)
 		inventories.DELETE("/:id", handlers.DeleteInventory)
+		
 	}
 }

@@ -131,16 +131,284 @@
       "name": "inventory",
       "item": [
         {
-          "name": "Get Inventories",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
+          "name": "Get Inventrories",
+          "item": [
+            {
+              "name": "Get Inventories",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"Uno\"\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Inventories with Pagination",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\":\"Football Shoes\",\n    \"brand\":\"Nike\",\n    \"model_name\":\"Mercurial\",\n    \"description\":\"Professional football shoes\",\n    \"price\":5999,\n    \"offer\":10,\n    \"quantity\":20,\n    \"category_id\":1\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories?page=2&limit=2",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "2"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Searched Inventories",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\":\"Football Shoes\",\n    \"brand\":\"Nike\",\n    \"model_name\":\"Mercurial\",\n    \"description\":\"Professional football shoes\",\n    \"price\":5999,\n    \"offer\":10,\n    \"quantity\":20,\n    \"category_id\":1\n}"
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories?search=glove",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "glove"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Inventories by Category",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories?category_id=3",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories"
+                  ],
+                  "query": [
+                    {
+                      "key": "category_id",
+                      "value": "3"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Sorted inventories",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories?sort=price&order=asc",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories"
+                  ],
+                  "query": [
+                    {
+                      "key": "sort",
+                      "value": "price"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories?page=1&limit=5&search=nike&sort=price&order=desc",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "search",
+                      "value": "nike"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "price"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Export",
+          "item": [
+            {
+              "name": "Create Excel Export Job",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories/export",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories",
+                    "export"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Check Export Excel Job Status",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories/export/a564e1cc-2d64-4bff-b393-b747a663f4d4",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories",
+                    "export",
+                    "a564e1cc-2d64-4bff-b393-b747a663f4d4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Download Completed Excel Export Job",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/v1/inventories/export/a564e1cc-2d64-4bff-b393-b747a663f4d4/download",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "inventories",
+                    "export",
+                    "a564e1cc-2d64-4bff-b393-b747a663f4d4",
+                    "download"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Create Inventory",
           "request": {
-            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"name\": \"Uno\"\n}"
+              "raw": "{\n    \"name\":\"Air Strike Goalkeeper Gloves for Men and Women\",\n    \"brand\":\"Nivia\",\n    \"model_name\":\"Air Strike\",\n    \"description\":\"Pu latex Gloves, Footbacl hans gloves Medium\",\n    \"price\":362,\n    \"offer\":0,\n    \"quantity\":8,\n    \"category_id\":3\n}"
             },
             "url": {
               "raw": "{{BASE_URL}}/api/v1/inventories",
@@ -151,6 +419,60 @@
                 "api",
                 "v1",
                 "inventories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Inventory",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Blaze Football Practice Ball\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/v1/inventories/3",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "inventories",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"category_id\": 3\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/v1/inventories/1",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "inventories",
+                "1"
               ]
             }
           },
@@ -187,82 +509,10 @@
           "response": []
         },
         {
-          "name": "Create Inventory",
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\":\"Football Shoes\",\n    \"brand\":\"Nike\",\n    \"model_name\":\"Mercurial\",\n    \"description\":\"Professional football shoes\",\n    \"price\":5999,\n    \"offer\":10,\n    \"quantity\":20,\n    \"category_id\":1\n}"
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/api/v1/inventories",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "inventories"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Inventory",
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"category_id\": 3\n}"
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/api/v1/inventories/2",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "inventories",
-                "2"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "New Request",
           "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "DELETE",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"category_id\": 3\n}"
-            },
-            "url": {
-              "raw": "{{BASE_URL}}/api/v1/inventories/1",
-              "host": [
-                "{{BASE_URL}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "inventories",
-                "1"
-              ]
-            }
+            "method": "GET",
+            "header": []
           },
           "response": []
         }

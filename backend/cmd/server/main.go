@@ -7,6 +7,8 @@ import (
 
 	"backend/internals/database" // import database package for connecting to the database
 
+	"backend/internals/workers" // import workers package to start the export worker
+
 	"github.com/gin-gonic/gin" // gin framework import
 	"github.com/joho/godotenv" // godotenv package for loading environment variables
 )
@@ -21,6 +23,9 @@ func main () {
 	if(err != nil) {
 		log.Fatal("Error loading .env file:", err)
 	}
+
+	// start the export worker
+	workers.StartExportWorker()
 
 	// basic setup for gin router
 	router := gin.Default()

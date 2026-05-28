@@ -11,9 +11,70 @@ import (
 
 // GET ALL INVENTORIES
 func GetInventories(c *gin.Context) {
+	// query params 
+	page:= c.DefaultQuery("page", "1")
+	limit:= c.DefaultQuery("limit", "10")	
+	search:= c.DefaultQuery("search", "")
+	categoryID := c.DefaultQuery("category_id", "")
+	sortFeild:= c.DefaultQuery("sort", "created_at")
+	sortOrder := c.DefaultQuery("order", "desc")
+
+	// handle pagination
+	pageInt, err := strconv.Atoi(page)
+	if err != nil || pageInt < 1 {
+		pageInt = 1
+	}
+	limitInt, err := strconv.Atoi(limit)	
+	if err != nil || limitInt < 1 {
+		limitInt = 10
+	}
+	offset := (pageInt - 1) * limitInt
+
+	// query inventories with pagination, search, and sorting
 	var inventories []models.Inventory
 
-	result := database.DB.Preload("Category").Find(&inventories)
+	result := database.DB.Model(&models.Inventory{})
+
+	// apply search filter
+	if search != "" {
+		// GIN (Genralized Inverted Index) index is created on `search_vector` column for better performance
+		result = result.Where(
+		"search_vector @@ plainto_tsquery('english', ?)",
+			search,
+		)
+	}
+
+	// apply category filter
+	if categoryID != "" {	
+		result = result.Where("category_id = ?", categoryID)
+	}
+
+	// sort
+	allowedSortFeilds := map[string]bool{
+		"price": true,
+		"quantity": true,
+		"created_at": true,
+		"name": true,
+	}
+
+	if !allowedSortFeilds[sortFeild] {
+		sortFeild = "created_at"
+	}
+
+	// order
+	if sortOrder != "asc" && sortOrder != "desc" {
+		sortOrder = "desc"
+	}
+	sortQuery := sortFeild + " " + sortOrder
+
+	
+	// total count for pagination
+	var total int64
+	result.Count(&total)
+
+	// fetch paginated results
+	result = result.Preload("Category").Order(sortQuery).Limit(limitInt).Offset(offset).Find(&inventories)
+
 
 	// check for errors during the database query
 	if result.Error != nil {
@@ -29,6 +90,17 @@ func GetInventories(c *gin.Context) {
 	// response with the list of inventories
 	c.JSON(http.StatusOK, gin.H{
 		"success": true,
+		"pagination": gin.H{
+			"total": total,
+			"page": pageInt,
+			"limit": limitInt,
+		},
+		"filters": gin.H{
+			"search": search,
+			"category_id": categoryID,
+			"sort_feild": sortFeild,
+			"sort_order": sortOrder,
+		},
 		"data": inventories,
 	})
 }
