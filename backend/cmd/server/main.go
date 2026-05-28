@@ -9,8 +9,9 @@ import (
 
 	"backend/internals/workers" // import workers package to start the export worker
 
-	"github.com/gin-gonic/gin" // gin framework import
-	"github.com/joho/godotenv" // godotenv package for loading environment variables
+	"github.com/gin-contrib/cors" // CROS allow
+	"github.com/gin-gonic/gin"    // gin framework import
+	"github.com/joho/godotenv"    // godotenv package for loading environment variables
 )
 
 func main () {
@@ -29,6 +30,33 @@ func main () {
 
 	// basic setup for gin router
 	router := gin.Default()
+	// CORS configuration
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{
+			"http://localhost:3000",
+		},
+
+		AllowMethods: []string{
+			"GET",
+			"POST",
+			"PUT",
+			"DELETE",
+			"OPTIONS",
+		},
+
+		AllowHeaders: []string{
+			"Origin",
+			"Content-Type",
+			"Accept",
+			"Authorization",
+		},
+
+		ExposeHeaders: []string{
+			"Content-Length",
+		},
+
+		AllowCredentials: true,
+	}))
 	routes.RegisterRoutes(router)
 	log.Println("Server is running on port " + os.Getenv("PORT"))
 
