@@ -238,6 +238,12 @@ func UpdateInventory(c *gin.Context) {
 		return
 	}
 
+	// adjustment
+	if model, exists := payload["model"]; exists {
+	payload["product_model"] = model
+	delete(payload, "model")
+}
+
 	// If category_id is being updated, check if the new category exists
 	updateResult := database.DB.Model(&inventory).Updates(payload)
 

@@ -1,240 +1,199 @@
 # Sport Store Inventory Management System
 
-Micro-services based inventory management web application 
+A full-stack inventory management application with a Next.js frontend and a Go backend.
+
+This repo contains two independently documented services:
+
+- `frontend/` — Next.js inventory dashboard UI
+- `backend/` — Go API and Excel export worker
+
+> See [frontend/README.md](./frontend/README.md) and [backend/README.md](./backend/README.md) for detailed setup and implementation notes.
 
 ---
 
-## Screenshots
+## Screenshots & Visuals
 
-### Inventory List
-(TODO)
-
-### Add Inventory
-(TODO)
-
----
-
-## Tech Stack
-
-### Backend
-- Golang
-- Gin
-- gRPC
-- GORM
-
-### Frontend
-- Next.js
-- TailwindCSS
-
-### Database
-- PostgreSQL
-
----
-
-## Project Structure
-
-```ASCII
-sport-store-inventory/
-│
-├── backend/
-│   ├── cmd/
-│   │   └── server/
-│   │       └── main.go
-│   │
-│   ├── internal/
-│   │   ├── handlers/
-│   │   ├── services/
-│   │   ├── repositories/
-│   │   ├── models/
-│   │   ├── db/
-│   │   └── search/
-│   │
-│   ├── proto/
-│   │
-│   ├── go.mod
-|   │
-|   ├── .gitignore
-|   │
-│   └── .env
-│
-├── frontend/
-|   │
-|   ├── .gitignore
-|   │
-│   └── .env
-│
-├── docs/
-│
-├── docker-compose.yml
-│
-└── README.md
-```
-
----
-
-## Architecture
-
-```ASCII
-Frontend (Next.js)
-      |
- REST API
-      |
-Go Gateway
-      |
-    gRPC
-      |
-Inventory Service
-      |
- PostgreSQL
-```
-
----
-
-## Project Setup Instructions
-
-```
-```
+![Home Page](./screenshots/home-page.png)
+![Search Page](./screenshots/search-page.png)
 
 ---
 
 ## Features Checklist
 
----
-
-## Development Plan and Progress
-
-### DAY 1 — Understand Go + Build CRUD
-
-#### Goal:
-  - become comfortable with Go syntax
-  - create working backend
-
-#### Go concepts to lean:
-  - [x] structs
-  - [x] methods
-  - [] interfaces (basic)
-  - [] goroutines
-  - [] channels (basic only)
-  - [x] Gin framework
-  - [x] database/sql OR GORM
-  - [] context.Context
-  - [x] error handling
-
-#### Deliverables
-  - [x] Plan the project (22 May 10:00 PM)
-  - [x] create repo (23 May - 7:00 AM)
-  - [x] install Go (23 May - 8:00 PM)
-  - [x] setup PostgreSQL (24 May - 12:12 PM)
-  - [x] schema design (24 May - 3:00 PM)
-  - [x] learn and setup backend (24 May - 4:00 PM)
-
-#### Note 
-
-> Intial target is working busines logic with REST. gRPC wrap will later
-  
----
-
-### DAY 2 — Search + Async + Excel
-
-#### Goal:
-  - learn inverted index
-  - complete working backend
-
-#### Go concepts to lean:
-  - [] inverted index search
-  - [] Excel export
-
-#### Deliverables
-  - [] complete tokenized search
-  - [] Async Add/Update
-  - [] excel generation
-
-#### Note 
-
-> Trie based Elasticsearch-level engineering is not required. simple in-memory inverted indexing also work.
+- ✅ Inventory dashboard with analytics summary cards
+- ✅ Inventory list view with category filtering
+- ✅ Inventory edit flow (`/inventories/[id]/edit`)
+- ✅ Backend REST API for inventories, categories, dashboard, and exports
+- ✅ Asynchronous Excel export pipeline
+- ✅ PostgreSQL schema and seed data scripts
+- ✅ React Query caching and client/server split UI
+- ✅ Healthcheck endpoint
+- ✅ Responsive UI using Tailwind CSS
+- ⚠️ Authentication / authorization
+- ⚠️ Persistent export jobs and queue storage
+- ⚠️ Database migration tooling
+- ⚠️ End-to-end or unit test coverage
+- ⚠️ Docker / deployment manifests
 
 ---
 
-### DAY 3 — gRPC
+## Progress Summary
 
-#### Goal:
-  - learn gRPC
-  - gRPC wrap to backend
-    ```ASCII
-        Client UI
-           |
-        HTTP REST
-           |
-        Gateway
-           |
-        gRPC
-           |
-        Inventory Service
-    ```
+This project is currently in the **80–90% completion range** against the original plan.
 
-#### Concepts to lean:
-  - [] protobuf basics
-  - [] service definitions
-  - [] request/response messages
+### Completed
 
-#### Deliverables
-  - [] ready with getaway
-  - [] gRPC layer
+- ✅ Built a working backend with REST APIs for inventory, category, dashboard, and export
+- ✅ Implemented frontend dashboard, inventory listing, and edit page
+- ✅ Added analytics endpoints for low stock, offers, and category distribution
+- ✅ Integrated Excel export job flow and download support
+- ✅ Added database initialization scripts for schema and sample data
+- ✅ Documented frontend and backend in separate README files
+- ✅ Delivered a stable server/client hybrid frontend architecture
 
-#### Note 
+### Remaining / Missed
 
-> Need to demonstrate can I use gRPC correctly? , advanced protobuf mastery streaming, distributed architecture not needed
+- ⚠️ gRPC gateway and protobuf service layer were not implemented
+- ⚠️ Export job tracking is still in-memory and not durable across restarts
+- ⚠️ No authentication or user access control exists
+- ⚠️ No migration framework or automated schema migrations
+- ⚠️ UI error handling is minimal and lacks production-ready feedback
+- ⚠️ No test suite is provided yet
+- ⚠️ Dockerization and deployment orchestration are not included
 
 ---
 
-### DAY 4 — UI
+## Tech Stack
 
-#### Goal:
-  - complete working web app
-  - good UX
+![Next.js](https://img.shields.io/badge/Frontend-Next.js-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38B2AC?logo=tailwindcss)
+![React Query](https://img.shields.io/badge/Data%20Fetch-React%20Query-FE4154?logo=react-query)
 
-#### Deliverables
-  - [] Admin Dashboard
-    - [] inventory list
-    - [] add inventory
-    - [] edit inventory
-    - [] search
-    - [] export button
-  - [] Tailwind bas=ised clean UI
-
-#### Note 
-
-> Working product first priority, don't flow in beautiful UI (important self note)
+![Go](https://img.shields.io/badge/Backend-Go-00ADD8?logo=go)
+![Gin](https://img.shields.io/badge/Framework-Gin-000000)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791?logo=postgresql)
+![GORM](https://img.shields.io/badge/ORM-GORM-8C1515)
 
 ---
 
-### DAY 5 — Polish
+## Architecture
 
-#### Goal:
-  - index on DB
-  - Logging
-  - Seed Data
+The project is designed as a clean separation between the UI and service layer, with a backend export worker and PostgreSQL persistence.
 
-#### Deliverables
-  - [] Indexes on DB for features
-  - [] logging for backend
-  - [] Error boundry for frontned
-  - [] add seed data for intialiazation
+```text
+Browser / End user
+      |
+      |  HTTP
+      v
+Next.js Frontend (React, Tailwind, React Query)
+      |
+      |  REST / API calls
+      v
+Go Backend (Gin)
+      |
+      |  GORM
+      v
+PostgreSQL Database
+
+Backend export worker:
+  └─ Generates Excel reports using excelize
+  └─ Persists files to backend/exports
+  └─ Tracks job state in memory
+```
+
+### Detailed flow
+
+```text
+[Browser] --> [Next.js UI] --> [Backend API]
+                              |---> [Inventory CRUD]
+                              |---> [Dashboard metrics]
+                              |---> [Export job enqueue]
+                                      |--> [Export worker]
+                                      |--> [Excel file saved on disk]
+                              |---> [Category data]
+[Backend API] --> [PostgreSQL]
+```
 
 ---
 
-## 📜 License
+## Repository Layout
+
+```text
+sport-store-inventory/
+├── backend/
+│   ├── cmd/server/main.go
+│   ├── internals/
+│   ├── scripts/
+│   │   ├── schema.sql
+│   │   └── seed.sql
+│   └── README.md
+├── frontend/
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   ├── providers/
+│   ├── services/
+│   ├── types/
+│   └── README.md
+├── LICENSE
+└── README.md
+```
+
+---
+
+## Getting Started
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Backend
+
+```bash
+cd backend
+go run ./cmd/server
+```
+
+Open [http://localhost:8080](http://localhost:8080) and ensure `.env` is configured.
+
+> For full installation, API routes, and environment details, see [frontend/README.md](./frontend/README.md) and [backend/README.md](./backend/README.md).
+
+---
+
+## What This Helps You Show
+
+This README is designed to help you show what you built, what is complete, and what remains to be polished for a production-grade delivery.
+
+---
+
+## Future Improvements
+
+- Add authentication and authorization
+- Persist export jobs and results in a database or queue
+- Add database migrations with `golang-migrate`
+- Add frontend and backend test coverage
+- Add Docker / deployment manifests
+- Improve UI error handling and feedback
+- Add monitoring and logging for production readiness
+
+---
+
+## License
 
 This project is licensed under the [MIT License](./LICENSE).
 
 ---
 
-## 👨‍💻 Author & Maintainer
+## Author
 
-**Pritam Kininge** — Problem Solver 
-🗓️ Submitted: May 23, 2026  
-[LinkedIn](https://linkedin.com/in/pritam-kininge)  |  [GitHub](https://github.com/kininge)  |  [Leetcode](https://leetcode.com/u/kininge007/)
-
-
-
-
+**Pritam Kininge** — Senior Software Developer  
+📍 Pune, India (UTC+5:30)  
+🗓️ Submitted: May 31, 2026  
+[LinkedIn](https://linkedin.com/in/pritam-kininge) | [GitHub](https://github.com/kininge) | [Leetcode](https://leetcode.com/u/kininge007/)

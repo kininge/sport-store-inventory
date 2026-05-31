@@ -11,10 +11,17 @@ func RegisterRoutes(router *gin.Engine) {
 	apiV1 := router.Group("/api/v1")
 	categories := apiV1.Group("/categories")
 	inventories := apiV1.Group("/inventories")
+	dashboard := apiV1.Group("/dashboard")
 	{
 		// define a GET route for fetching data
 		apiV1.GET("/health", handlers.HealthCheckHandler)
-		
+
+		// dashboard route
+		dashboard.GET("", handlers.GetDashboard)
+		dashboard.GET("/offer-stock", handlers.GetTopOffers)
+		dashboard.GET("/low-stock", handlers.GetLowStockItems)
+		dashboard.GET("/category-distribution", handlers.GetCategoryDistribution)
+
 		// define routes for categories
 		categories.GET("", handlers.GetCategories)
 		categories.GET("/:id", handlers.GetCategoryByID)

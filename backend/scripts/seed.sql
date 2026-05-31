@@ -1,6 +1,7 @@
 TRUNCATE TABLE inventories RESTART IDENTITY CASCADE;
 TRUNCATE TABLE categories RESTART IDENTITY CASCADE;
 
+-- Categories
 INSERT INTO categories (name) VALUES
 ('Cricket'),
 ('Football'),
@@ -13,6 +14,7 @@ INSERT INTO categories (name) VALUES
 ('Cycling'),
 ('Yoga');
 
+-- Manual realistic products
 INSERT INTO inventories (
     name,
     brand,
@@ -286,3 +288,223 @@ VALUES
     33,
     10
 );
+
+-- Generated Cricket Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Cricket Bat Model ' || gs,
+    (ARRAY['SG','SS','MRF','Kookaburra','Gray Nicolls'])[floor(random()*5+1)],
+    'CB-' || gs,
+    'Premium cricket bat suitable for practice and tournament matches',
+    floor(random()*9000 + 1000),
+    floor(random()*30),
+    floor(random()*100 + 1),
+    1
+FROM generate_series(1,20) gs;
+
+-- Generated Football Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Football Shoes ' || gs,
+    (ARRAY['Nike','Adidas','Puma','Nivia'])[floor(random()*4+1)],
+    'FB-' || gs,
+    'Professional football shoes for training and matches',
+    floor(random()*7000 + 1000),
+    floor(random()*25),
+    floor(random()*50 + 1),
+    2
+FROM generate_series(1,20) gs;
+
+-- Generated Basketball Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Basketball Item ' || gs,
+    (ARRAY['Spalding','Wilson','Nike','Puma'])[floor(random()*4+1)],
+    'BB-' || gs,
+    'Professional basketball equipment',
+    floor(random()*6000 + 500),
+    floor(random()*20),
+    floor(random()*40 + 1),
+    3
+FROM generate_series(1,10) gs;
+
+-- Generated Tennis Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Tennis Equipment ' || gs,
+    (ARRAY['Wilson','Head','Babolat'])[floor(random()*3+1)],
+    'TN-' || gs,
+    'Professional tennis gear',
+    floor(random()*8000 + 500),
+    floor(random()*15),
+    floor(random()*30 + 1),
+    5
+FROM generate_series(1,10) gs;
+
+-- Generated Running Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Running Shoes ' || gs,
+    (ARRAY['Nike','Adidas','Asics','Puma'])[floor(random()*4+1)],
+    'RN-' || gs,
+    'Lightweight running shoes',
+    floor(random()*7000 + 1000),
+    floor(random()*20),
+    floor(random()*60 + 1),
+    6
+FROM generate_series(1,10) gs;
+
+-- Generated Gym Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Gym Equipment ' || gs,
+    (ARRAY['Boldfit','Strauss','Decathlon'])[floor(random()*3+1)],
+    'GY-' || gs,
+    'Strength training equipment',
+    floor(random()*10000 + 500),
+    floor(random()*15),
+    floor(random()*30 + 1),
+    7
+FROM generate_series(1,10) gs;
+
+-- Generated Swimming Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Swimming Gear ' || gs,
+    (ARRAY['Speedo','Arena','Nabaiji'])[floor(random()*3+1)],
+    'SW-' || gs,
+    'Professional swimming equipment',
+    floor(random()*3000 + 300),
+    floor(random()*10),
+    floor(random()*70 + 1),
+    8
+FROM generate_series(1,10) gs;
+
+-- Generated Cycling Products
+INSERT INTO inventories (
+    name,
+    brand,      
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT      
+    'Cycling Gear ' || gs,
+    (ARRAY['Btwin','Rockrider','Decathlon'])[floor(random()*3+1)],
+    'CY-' || gs,
+    'Durable cycling equipment',
+    floor(random()*4000 + 500),
+    floor(random()*12),
+    floor(random()*40 + 1),
+    9
+FROM generate_series(1,10) gs;  
+
+-- Generated Yoga Products
+INSERT INTO inventories (
+    name,
+    brand,
+    product_model,
+    description,
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Yoga Product ' || gs,
+    (ARRAY['Boldfit','AmazonBasics','Strauss'])[floor(random()*3+1)],
+    'YG-' || gs,
+    'Yoga and stretching accessory',
+    floor(random()*2000 + 200),
+    floor(random()*10),
+    floor(random()*50 + 1),
+    10
+FROM generate_series(1,10) gs;
+
+-- Additional random products for variety
+INSERT INTO inventories (
+    name,
+    brand,          
+    product_model,
+    description,        
+    price,
+    offer,
+    quantity,
+    category_id
+)
+SELECT
+    'Sports Item ' || gs,       
+    (ARRAY['Nike','Adidas','Puma','SG','SS','Wilson','Head','Boldfit','Speedo'])[floor(random()*9+1)],
+    'SP-' || gs,
+    'High-quality sports equipment for various activities',
+    floor(random()*10000 + 500),
+    floor(random()*30),
+    floor(random()*100 + 1),
+    floor(random()*10 + 1)
+FROM generate_series(1,20) gs;  
